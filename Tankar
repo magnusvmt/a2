@@ -1,1 +1,23 @@
 Exmepel 5.3.2 finns på sidan 591 i boken.
+
+Uppgift: 
+Du ska skriva så att en robot kan hitta var den är i ett område utan 'landmarks'.
+Det som ska användas(och simuleras) är en sensor på roboten som rapporterar:
+ - the true location L with probability 0.1
+ - any of the 8 surrounding fields L_s with probability 0.05 each
+ - any of the next 16 surrounding fields L_s2 with probability 0.025 each
+ - "nothing" with probability 0.1
+
+Så jag vill ha en värld för där man sätter en robot på en godtycklig plats, dena världen ska man kunna pinga för att kunna se var man är (med sannolikheterna ovan). Sen så ska det finnas ett sett att lösa var man e utifrån de.
+
+Sannolikheter:
+                                         sum:
+     0.025, 0.025, 0.025, 0.025, 0.025 | 5*0.25 = 0.125
+     0.025, 0.05 , 0.05 , 0.05 , 0.025 | 0.5*4 = 0.2
+     0.025, 0.05 , 0.1  , 0.05 , 0.025 | 0.5*3+0.1 = 0.25
+     0.025, 0.05 , 0.05 , 0.05 , 0.025 | 0.5*4 = 0.2
+     0.025, 0.025, 0.025, 0.025, 0.025 | 5*0.25 = 0.125
+     --------------------------------------------------
+sum: 0.125, 0.2  , 0,25 , 0.2  , 0.125 | 0.9 
+
+Men sen så vill jag har ändrat detta så det också tar hänsyn till att nothing är redan medräknat (P(nothing) = 0.1); vilket jag vill få till att man bara adderar 0.01 på summan av varje rad/column. 
