@@ -21,3 +21,9 @@ Sannolikheter:
 sum: 0.125, 0.2  , 0,25 , 0.2  , 0.125 | 0.9 
 
 Men sen så vill jag har ändrat detta så det också tar hänsyn till att nothing är redan medräknat (P(nothing) = 0.1); vilket jag vill få till att man bara adderar 0.01 på summan av varje rad/column. 
+
+
+P( h_t+1 = h_t | not encountering a wall) = 0.7 => om 'not encountering a wall' så är det 0.7 chans att man rör sig åt samma håll
+P( h_t+1 != h_t | not encountering a wall) = 0.3
+P( h_t+1 = h_t | encountering a wall) = 0.0
+P( h_t+1 != h_t | encountering a wall) = 1.0
