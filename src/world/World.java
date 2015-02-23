@@ -32,20 +32,21 @@ public class World {
 	 */
 	public int[] sense() {
 		int[] ans = new int[2];
-		if ((int) (Math.random()) > 0.9) { // Nothing
+		if (Math.random() > 0.9) { // Nothing
 			ans = new int[] { -1, -1 };
 		} else {
-			int xChange = getChange((int) (Math.random()));
-			int yChange = getChange((int) (Math.random()));
-
-			ans[0] = loc[0] + xChange;
-			ans[0] = loc[0] + yChange;
+			int xError = getChange((int) (Math.random()));
+			int yError = getChange((int) (Math.random()));
+			
+			ans[0] = loc[0] + xError;
+			ans[1] = loc[1] + yError;
+			
 		}
 		return ans;
 	}
 
 	private int getChange(int die) {
-		int change = -1;
+		int change = 0;
 		if (die < 0.126) {
 			change = -2;
 		} else if (die < 0.327) {
@@ -73,7 +74,8 @@ public class World {
 					squares[loc[0]][loc[1]] = false;
 					loc[0] += 1;
 				} else {
-					dir = rand(4);
+					changeDir();
+					
 					move();
 				}
 				break;
@@ -83,7 +85,7 @@ public class World {
 					squares[loc[0]][loc[1]] = false;
 					loc[1] += 1;
 				} else {
-					dir = rand(4);
+					changeDir();
 					move();
 				}
 				break;
@@ -93,7 +95,7 @@ public class World {
 					squares[loc[0]][loc[1]] = false;
 					loc[0] -= 1;
 				} else {
-					dir = rand(4);
+					changeDir();
 					move();
 				}
 				break;
@@ -103,7 +105,7 @@ public class World {
 					squares[loc[0]][loc[1]] = false;
 					loc[1] -= 1;
 				} else {
-					dir = rand(4);
+					changeDir();
 					move();
 				}
 				break;
@@ -111,11 +113,20 @@ public class World {
 				System.err.println("Yeah something is wrong with the code is this happened.");
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			//om det blir kommer hit så har man nått en väg och det alltid så att man ändrar sig då.
-			dir = rand(4);
+			//Om det kommer hit så har man nått en väg och då ska man alltid byta väg.
+			//System.err.println("("+loc[0] + ","+loc[1]+")- "+dir );
+			changeDir();
 			move();
 		}
 
+	}
+
+	private void changeDir() {
+		int ans;
+		do{
+			ans = rand(4);
+		}while(ans == dir);
+		dir = ans;
 	}
 
 	/* return an int between 1 & n */
