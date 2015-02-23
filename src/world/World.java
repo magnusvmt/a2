@@ -1,6 +1,6 @@
 package world;
 
-public class world {
+public class World {
 	boolean[][] squares;
 	int[] loc;
 	int dir;
@@ -9,7 +9,7 @@ public class world {
 	 * Probably dont need this mess with a map n shit, but fuck you I want it
 	 * now.
 	 */
-	public world(int n, int m) {
+	public World(int n, int m) {
 		squares = new boolean[n][m];
 		loc = new int[2];
 		int randI = rand(n);
