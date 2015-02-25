@@ -1,5 +1,7 @@
 package world;
 
+import java.awt.Point;
+
 public class World {
 	boolean[][] squares;
 	int[] loc;
@@ -31,34 +33,31 @@ public class World {
 	 * implemented yet.
 	 */
 	public int[] sense() {
-		int[] ans = new int[2];
-		if (Math.random() > 0.9) { // Nothing
-			ans = new int[] { -1, -1 };
-		} else {
-			int xError = getChange((int) (Math.random()));
-			int yError = getChange((int) (Math.random()));
-			
-			ans[0] = loc[0] + xError;
-			ans[1] = loc[1] + yError;
-			
+		int x = loc[0];
+		int y = loc[1];
+		Point[] L_s = { new Point(x - 1, y - 1), new Point(x - 1, y),
+				new Point(x - 1, y + 1), new Point(x, y - 1),
+				new Point(x, y + 1), new Point(x + 1, y - 1),
+				new Point(x + 1, y), new Point(x + 1, y + 1) };
+		Point[] L_s2 = { new Point(x - 2, y - 2), new Point(x - 2, y - 1),
+				new Point(x - 2, y), new Point(x - 2, y + 1),
+				new Point(x - 2, y + 2), new Point(x - 1, y - 2),
+				new Point(x - 1, y + 2), new Point(x, y - 2),
+				new Point(x, y + 2), new Point(x + 1, y - 2),
+				new Point(x + 1, y + 2), new Point(x + 2, y - 2),
+				new Point(x + 2, y - 1), new Point(x + 2, y),
+				new Point(x + 2, y + 1), new Point(x + 2, y + 2) };
+		int die = rand(10);
+		if(die <= 1){
+			return loc;
+		}else if(die <=  5){
+			Point p = L_s[rand(L_s.length)-1];
+			return new int[] {p.x, p.y};
+		}else if(die <=  9){
+			Point p = L_s2[rand(L_s2.length)-1];
+			return new int[] {p.x, p.y};
 		}
-		return ans;
-	}
-
-	private int getChange(int die) {
-		int change = 0;
-		if (die < 0.126) {
-			change = -2;
-		} else if (die < 0.327) {
-			change = -1;
-		} else if (die < 0.478) {
-			change = 0;
-		} else if (die < 0.679) {
-			change = 1;
-		} else if (die < 0.68) {
-			change = 2;
-		}
-		return change;
+		return new int[] {-1, -1};
 	}
 
 	public int[] getRightLoc() {
@@ -75,7 +74,7 @@ public class World {
 					loc[0] += 1;
 				} else {
 					changeDir();
-					
+
 					move();
 				}
 				break;
@@ -110,11 +109,13 @@ public class World {
 				}
 				break;
 			default:
-				System.err.println("Yeah something is wrong with the code is this happened.");
+				System.err
+						.println("Yeah something is wrong with the code is this happened.");
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			//Om det kommer hit så har man nått en väg och då ska man alltid byta väg.
-			//System.err.println("("+loc[0] + ","+loc[1]+")- "+dir );
+			// Om det kommer hit så har man nått en väg och då ska man alltid
+			// byta väg.
+			// System.err.println("("+loc[0] + ","+loc[1]+")- "+dir );
 			changeDir();
 			move();
 		}
@@ -123,9 +124,9 @@ public class World {
 
 	private void changeDir() {
 		int ans;
-		do{
+		do {
 			ans = rand(4);
-		}while(ans == dir);
+		} while (ans == dir);
 		dir = ans;
 	}
 
