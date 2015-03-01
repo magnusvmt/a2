@@ -28,3 +28,13 @@ P( h_t+1 = h_t | not encountering a wall) = 0.7 => om 'not encountering a wall' 
 P( h_t+1 != h_t | not encountering a wall) = 0.3
 P( h_t+1 = h_t | encountering a wall) = 0.0
 P( h_t+1 != h_t | encountering a wall) = 1.0
+
+
+Andra tankar angående hur vi ska skriva HMM (utgår ifrån basic model på wiki). varning: jag har ingen aning om hur man ska göra.
+
+states = wall, no wall
+observations = continue, change direction
+transition= {No wall: wall,nowall; Wall: wall, nowall} sannolikheterna att man får från nowall till nowall/wall och tvärtom
+emission = {Nowall: continue 0.3, change 0.7; Wall: continue 0; change 1}
+
+Nått sånt kanske? Fast man kanske måste ta med sensorn i beräkningarna på nått vis?
