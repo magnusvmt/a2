@@ -33,3 +33,12 @@ P( h_t+1 != h_t | encountering a wall) = 1.0
 ( P(x|y) betyder om y �r sant s� �r det P(x|y) sannoligt att x �r sant )
 
 Om vi sensar en punkt x1 s�  
+Andra tankar angående hur vi ska skriva HMM (utgår ifrån basic model på wiki). varning: jag har ingen aning om hur man ska göra.
+
+states = wall, no wall
+observations = continue, change direction
+transition= {No wall: wall,nowall; Wall: wall, nowall} sannolikheterna att man får från nowall till nowall/wall och tvärtom
+emission = {Nowall: continue 0.3, change 0.7; Wall: continue 0; change 1}
+
+Nått sånt kanske? Fast man kanske måste ta med sensorn i beräkningarna på nått vis?
+
