@@ -1,13 +1,13 @@
-package world;
+package main;
 
 import java.awt.Point;
 
-public class World2 {
+public class World {
 	boolean[][] map_of_walls;
 	int[] robot_loc;
 	int direction;
 	//Map with walls surounding it, the robot is place in a random spot in it;
-	public World2(int n, int m){
+	public World(int n, int m){
 		map_of_walls = new boolean[n][m]; //true if wall, false if not
 		robot_loc = new int[2];
 		for(int i = 0; i != n; ++i){

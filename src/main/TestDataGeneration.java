@@ -1,11 +1,9 @@
 package main;
 
-import world.*;
-
-public class Test {
+public class TestDataGeneration {
 
 	public static void main(String[] args) {
-		World2 world = new World2(10,10);
+		World world = new World(10,10);
 		int nbrCorrect = 0;
 		int ammount_of_tries = 100;
 		int nbrFaults = 0;

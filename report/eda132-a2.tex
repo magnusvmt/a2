@@ -58,7 +58,7 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{Assignment 1: The Reversi Game}} % Article title
+\title{\vspace{-15mm}\fontsize{24pt}{10pt}\selectfont\textbf{Assignment 2: Probabilistic Reasoning}} % Article title
 
 \author{
 \large
@@ -79,13 +79,21 @@ Anton Karlstedt}\\[2mm] % Your name
 
 %\newpage
 \section{System} % OLD TEXT BELLOW
-The system is written in java and divided into four classes; UserInterface, Coordinate, Board and AI. The UserInterface class make up the user interface, the Coordinate class is a side class used to make some of the coding more convenient. The main code is inside Board and AI, the Board class having functions for turning over tiles, checking if a placement is valid and the like. Its also worth noting that theres a nested class for tiles in Board.
 
-The AI class is where the the decision making is, the mini-max adversarial search algorithm is used together with alpha-beta pruning and iterative deepening.
+This project is written in java and is divied into four files: Locate.java, TestDataGeneration.java, TestLocalisation.java and World.java. 
 
-Evaluation of a decision is based on three things, the amount of tiles on your side, the amount of choices you will be left with later and how many corners will be yours. The two later are only considered for the first half of the game, with the scoring of 1/100/1000 respectively. This scoring is based on [1].
+World.java is used to emulate the robots behavior with methods for sensing the location of the robot, moving the robot and for testing purposes get the actual location of the robot. 
+The TestDataGeneration.java file is mainly used for testing the functionality of World.java.
+
+Locate.java is where the main part of the assignment is, it contains the method for localising. TestLocalistion.java test this.
+
+\section{Discussion}
+The book, page 593[1] shows that for a matrix of size 42x42 the estimation error is generally close to 1 when you use more then 40 observations. In our case this has been mostly true with the exception 
+of a some extreme outliers.
+
 \section{Where you can find it}
-The code can be found in /h/d9/s/dt08ak0/kurser/eda132/A1, with the source files in src/ and the jar in the build folder. The argument -m can be added at the start of running the jar for some additional debugging output.
+The code can be found in /h/d9/s/dt08ak0/kurser/eda132/A2, with the source files in src/main and the jar in build/. The jar file emulates and tries to locate a robot in an 40x40 matrix 
+after 1000 steps. The jar file also accepts three arguments: the dimensions of the matrix (2 arguments) and the amount of steps the robot should take before it tries to locate it.
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
@@ -93,9 +101,8 @@ The code can be found in /h/d9/s/dt08ak0/kurser/eda132/A1, with the source files
 
 \begin{thebibliography}{99} % Bibliography - this is intentionally
                             % simple in this template
-
-\bibitem{docs1}  http://www.cs.cornell.edu/~yuli/othello/othello.html
-
+                            
+\bibitem{book}  Artificial Intelligence: A Modern Approach, 3/e, by Stuart Russell and Peter Norvig, ISBN-10: 0132071487.
 
 \end{thebibliography}
 
