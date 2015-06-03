@@ -43,16 +43,22 @@ public class Locate {
 				}
 			}
 		}
-		if(sensed_data.length == 1)
+		if(sensed_data.length == 1)	
 			return highest_prob(next_matrix);
+		
 				
 		int[][] other_data = new int[sensed_data.length-1][2];
 		for(int i = 1; i != sensed_data.length; ++i)
 			other_data[i-1] = sensed_data[i];
 		
-		return locate(other_data, next_matrix);
+		return arrayConcat(highest_prob(next_matrix),locate(other_data, next_matrix));
 	}
-
+	private static int[] arrayConcat(int[] a, int[] b){
+		int[] ans = new int[a.length+b.length];
+		System.arraycopy( a, 0, ans, 0, a.length);
+		System.arraycopy( b, 0, ans, a.length, b.length );
+		return ans;
+	}
 
 	private static int max(int i, int j) {
 		if(i >= j)
