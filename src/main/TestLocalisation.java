@@ -55,13 +55,15 @@ public class TestLocalisation {
 		int[] p = new int[2];
 		//lets not have an start place thats "nothing" (-1,-1)
 		do{
-			positions[0] = world.senseRobotLoc();
+			positions[0][0] = world.senseRobotLoc().x;
+			positions[0][1] = world.senseRobotLoc().y;
 			p = world.getRightLoc();					
 			correctPositions.add(new Point(p[0], p[1])) ;
 		} while(positions[0][0] == -1 || positions[0][1] == -1);
 		
 		for(int i = 1; i != ammount; ++i){
-			positions[i] = world.senseRobotLoc();
+			positions[i][0] = world.senseRobotLoc().x;
+			positions[i][1] = world.senseRobotLoc().y;
 			p = world.getRightLoc();					
 			correctPositions.add(new Point(p[0], p[1])) ;
 			world.moveRobot();

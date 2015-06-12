@@ -29,8 +29,8 @@ public class World {
 		return (int) (Math.random() * n + 1);
 	}
 	// for testing purposes;
-	public int[] getRightLoc() {
-		return robot_loc;
+	public Point getRightLoc() {
+		return new Point(robot_loc[0], robot_loc[1]);
 	}
 	// for testing purposes;
 	public int getDirection(){
@@ -52,7 +52,7 @@ public class World {
 		}
 		return "err";
 	}
-	public int[] senseRobotLoc() {
+	public Point senseRobotLoc() {
 		int x = robot_loc[0];
 		int y = robot_loc[1];
 		Point[] L_s = { new Point(x - 1, y - 1), new Point(x - 1, y),
@@ -72,16 +72,16 @@ public class World {
 		Point p2 = L_s2[rand(L_s2.length)-1];
 		try {
 		if(die <= 1){
-			return robot_loc;
+			return new Point(robot_loc[0],robot_loc[1]);
 		}else if(die <=  5 && !map_of_walls[p.x][p.y]){
-			return new int[] {p.x, p.y};
+			return p;
 		}else if(die <=  9 && !map_of_walls[p2.x][p2.y]){
-			return new int[] {p2.x, p2.y};
+			return p2;
 		}
 		} catch(ArrayIndexOutOfBoundsException e){
 			return senseRobotLoc();
 		}
-		return new int[] {-1, -1};
+		return new Point(-1,-1);
 	}
 	public void moveRobot() {
 		try {
@@ -123,7 +123,7 @@ public class World {
 					break;
 				default:
 					System.err
-							.println("Yeah something is wrong with the code is this happened.");
+							.println("Yeah something is wrong with the code if this happened.");
 				}
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
