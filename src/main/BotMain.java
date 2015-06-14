@@ -15,7 +15,7 @@ public class BotMain {
 		double amountNothing = 0;
 		double offGuess = 0;
 		double offSense = 0;
-		int iterations = 50;
+		int iterations = 100;
 		for(int i=0;i<iterations;i++){
 			Point sensorPos = w.senseRobotLoc();
 			Point rightPos = w.getRightLoc();
@@ -24,7 +24,7 @@ public class BotMain {
 				System.out.print("Gussed: (" + estimatePos.x +","+estimatePos.y + "), Correct: (" + rightPos.x + "," + rightPos.y + ")");
 				System.out.println(", Sense: ("+sensorPos.x + "," + sensorPos.y + ")");
 			}
-			if (rightPos.equals(estimatePos)) {
+			if (rightPos.equals(estimatePos) && (iterations*0.9) <= i) {
 				correctEstimates++;
 			}
 			if (debug && rightPos.equals(sensorPos)){
@@ -38,7 +38,7 @@ public class BotMain {
 			w.moveRobot();
 		}
 		System.out.println("Guess stats:");
-		double prob = ((double) (correctEstimates)) / iterations;
+		double prob = ((double) (correctEstimates)) / (iterations*0.1);
 		System.out.println("\t Guess correctly prob: " + prob);
 		System.out.println("\t Guess generaly off by " + (double)(offGuess/iterations));
 		if(debug){
