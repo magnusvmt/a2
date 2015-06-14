@@ -8,7 +8,7 @@ public class TestDataGeneration {
 		int ammount_of_tries = 100;
 		int nbrFaults = 0;
 		for(int i = 0; i != ammount_of_tries; i++){
-			int[] right = world.getRightLoc();
+			int[] right = new int[2];// = [];world.getRightLoc();
 			int[] wrong = {world.senseRobotLoc().x,world.senseRobotLoc().y};
 			System.out.print("Move "+i+": "+"("+right[0] + ","+right[1]+"), (direction:"+ world.getDirectionString() + ") ~= "+"("+wrong[0] + ","+wrong[1]+")" );
 			if(right[0] == wrong[0] && right[1] == wrong[1]){

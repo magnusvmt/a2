@@ -25,7 +25,7 @@ public class TestLocalisation {
 				
 		int[][] sensed_data = generate_data(ammount);
 		double[][] nullMatrix = nullMatrix();
-		int[] robot_loc = Locate.locate(sensed_data,nullMatrix);
+		int[] robot_loc = new int[2];//Locate.locate(sensed_data,nullMatrix);
 		
 		// test
 		int wx, wy, rx, ry;
@@ -57,14 +57,14 @@ public class TestLocalisation {
 		do{
 			positions[0][0] = world.senseRobotLoc().x;
 			positions[0][1] = world.senseRobotLoc().y;
-			p = world.getRightLoc();					
+			p = new int[2];//world.getRightLoc();					
 			correctPositions.add(new Point(p[0], p[1])) ;
 		} while(positions[0][0] == -1 || positions[0][1] == -1);
 		
 		for(int i = 1; i != ammount; ++i){
 			positions[i][0] = world.senseRobotLoc().x;
 			positions[i][1] = world.senseRobotLoc().y;
-			p = world.getRightLoc();					
+			p = new int[2];//world.getRightLoc();					
 			correctPositions.add(new Point(p[0], p[1])) ;
 			world.moveRobot();
 		}

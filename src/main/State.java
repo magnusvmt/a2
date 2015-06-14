@@ -52,12 +52,12 @@ public class State {
 	
 	public boolean isPossibleNextState(State state) {
 		Point nextPoint = state.p;
-		if (nextPoint.x == p.x && nextPoint.y == p.y-1 && state.direction == State.N
-				|| nextPoint.x == p.x && nextPoint.y == p.y+1
-				&& state.direction == State.S || nextPoint.x == p.x+1
-				&& nextPoint.y == p.y && state.direction == State.E
-				|| nextPoint.x == p.x-1 && nextPoint.y == p.y
-				&& state.direction == State.W) {
+		if ( (nextPoint.x == p.x && nextPoint.y == p.y-1 && state.direction == State.N)
+				|| (nextPoint.x == p.x && nextPoint.y == p.y+1
+				&& state.direction == State.S) || (nextPoint.x == p.x+1
+				&& nextPoint.y == p.y && state.direction == State.E)
+				|| (nextPoint.x == p.x-1 && nextPoint.y == p.y
+				&& state.direction == State.W) ) {
 			return true;
 		}
 		return false;

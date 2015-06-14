@@ -73,7 +73,7 @@ public class Locate {
 			for (int i = 0; i < nbrOfStates; i++) {
 				State s = stateVector[i];
 				int off = max(Math.abs(p.x - s.p.x), Math.abs(p.y - s.p.y));
-				System.out.println("distance from: " + p + " to " + s.p + " is: " + off);
+				//System.out.println("distance from: " + p + " to " + s.p + " is: " + off);
 				if (p.equals(s.p)) {
 					observationMatrix[i] = 0.1;
 				} else if (off == 1) {
@@ -114,7 +114,7 @@ public class Locate {
 			}
 			alpha += stateProb_next[row];
 		}
-		System.out.println(alpha);
+		//System.out.println(alpha);
 		alpha = 1 / alpha;
 		for (int i = 0; i < nbrOfStates; i++) {
 			stateVector[i].setProbability(stateProb_next[i] * alpha);
