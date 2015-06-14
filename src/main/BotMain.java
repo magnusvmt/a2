@@ -47,10 +47,10 @@ public class BotMain {
 		ans[1] =  guessLastProb;
 		System.out.println();
 		if(printStats){
-			System.out.println("Guess stats:");
-			System.out.println("\t Guess correctly prob: " + guessProb);
-			System.out.println("\t Guess(last 10%) correctly prob: " + guessLastProb);
-			System.out.println("\t Guess generaly off by " + (double)(offGuess/iterations));
+			System.out.println("Estimate stats:");
+			System.out.println("\t Estimate correctly prob: " + guessProb);
+			//System.out.println("\t Guess(last 10%) correctly prob: " + guessLastProb);
+			System.out.println("\t Estimate generaly off by " + (double)(offGuess/iterations));
 		}
 		if(debug){
 			double temp;
