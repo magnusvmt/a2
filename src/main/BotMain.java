@@ -3,11 +3,11 @@ package main;
 import java.awt.Point;
 
 public class BotMain {
-	public static void main(String[] args) {
-		boolean print = false;
+	public static double[] go(int xSize, int ySize, int iterations) {
+		double[] ans = new double[2];
+		boolean print = true;
 		boolean debug = true;
-		int xSize = 30;
-		int ySize = 30;
+		boolean printStats = true;
 		World w  = new World(xSize,ySize);
 		Locate l = new Locate(xSize, ySize);
 		int correctEstimates = 0;
@@ -15,17 +15,21 @@ public class BotMain {
 		double amountNothing = 0;
 		double offGuess = 0;
 		double offSense = 0;
-		int iterations = 100;
+		double last = 0.9;
+		double correctGuessLast = 0;
 		for(int i=0;i<iterations;i++){
 			Point sensorPos = w.senseRobotLoc();
 			Point rightPos = w.getRightLoc();
 			Point estimatePos = l.getMostLikelyLocation(sensorPos);
 			if(print){
-				System.out.print("Gussed: (" + estimatePos.x +","+estimatePos.y + "), Correct: (" + rightPos.x + "," + rightPos.y + ")");
+				System.out.print("Estimate: (" + estimatePos.x +","+estimatePos.y + "), Actuall: (" + rightPos.x + "," + rightPos.y + ")");
 				System.out.println(", Sense: ("+sensorPos.x + "," + sensorPos.y + ")");
 			}
-			if (rightPos.equals(estimatePos) && (iterations*0.9) <= i) {
+			if (rightPos.equals(estimatePos)) {
 				correctEstimates++;
+			}
+			if (rightPos.equals(estimatePos) && (iterations*last) <= i) {
+				correctGuessLast++;
 			}
 			if (debug && rightPos.equals(sensorPos)){
 				correctSense++;
@@ -37,10 +41,17 @@ public class BotMain {
 				offSense += Math.sqrt((sensorPos.x - rightPos.x)*(sensorPos.x - rightPos.x) + (sensorPos.y - rightPos.y)*(sensorPos.y - rightPos.y));
 			w.moveRobot();
 		}
-		System.out.println("Guess stats:");
-		double prob = ((double) (correctEstimates)) / (iterations*0.1);
-		System.out.println("\t Guess correctly prob: " + prob);
-		System.out.println("\t Guess generaly off by " + (double)(offGuess/iterations));
+		double guessProb = ((double) (correctEstimates)) / iterations;
+		double guessLastProb = ((double) (correctGuessLast)) / (iterations*(1-last));
+		ans[0] = guessProb;
+		ans[1] =  guessLastProb;
+		System.out.println();
+		if(printStats){
+			System.out.println("Guess stats:");
+			System.out.println("\t Guess correctly prob: " + guessProb);
+			System.out.println("\t Guess(last 10%) correctly prob: " + guessLastProb);
+			System.out.println("\t Guess generaly off by " + (double)(offGuess/iterations));
+		}
 		if(debug){
 			double temp;
 			System.out.println("Sense stats:");
@@ -53,7 +64,29 @@ public class BotMain {
 			
 			
 		}
+		return ans;
+	}
+	public static void main(String[] args){
+		int tries = 1;
+		double totFull = 0;
+		double totLast = 0;
+		int iterations = 100;
+		int xSize = 30;
+		int ySize = 30;
+		if(args.length == 3){
+			xSize = Integer.parseInt(args[0]);
+			ySize = Integer.parseInt(args[1]);
+			iterations = Integer.parseInt(args[2]);
+		}
+		
+		for(int i = 0; i != tries; ++i){
+			double[] ans = go(xSize, ySize, iterations);
+			totFull += ans[0];
+			totLast += ans[1];
+		}
+		totFull = totFull / tries;
+		totLast = totLast / tries;
+		//System.out.println("totFull: " + totFull + ", totLast:" + totLast);
 		
 	}
-
 }
